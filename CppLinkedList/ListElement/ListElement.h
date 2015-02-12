@@ -1,3 +1,4 @@
+
 /* 
  * File:   LinkedElement.h
  * Author: yuyc

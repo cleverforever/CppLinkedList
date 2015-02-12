@@ -11,43 +11,59 @@
 
 using namespace std;
 
-LinkedList::LinkedList():_head(NULL),_tail(NULL){}
-
-LinkedList::~LinkedList() {
+template<class T>
+LinkedList<T>::~LinkedList() {
     if (_head){
-        listElement* cur = NULL;
+        ListElement<T>* cur = NULL;
         do{
             cur = _head;
-            _head = cur->_next;
+            _head = cur->getNext();
             delete cur;
         }while(cur);
     }
 }
 
-bool LinkedList::insertInfront(int data){
-    listElement *newElem = (listElement*)malloc(sizeof(listElement));
+template<class T>
+bool LinkedList<T>::insertInfront(const T& data){
+    ListElement<T> *newElem = new ListElement<T>(data);
     if (!newElem) {
         cout << "error happened @ insertInfront"<<endl;
         return false;
     }
     
-    newElem->_data = data;
-    newElem->_next = _head;      
-    _head = newElem;
+    newElem->setValue(data);
+    newElem->setNext(_head);      
+    this->setHead(newElem);
 
     return true;    
 }
 
-void LinkedList::printList() {
-    if(!_head) return;
+template<class T>
+void LinkedList<T>::printList() {
+    ListElement<T> *head = this->getHead();
+    if( !head ) return;
    
     int i=0;
-    listElement *cur = _head;
+    ListElement<T> *cur = head;
     while(cur){
-       cout<<"No:"<<i <<" is " << cur->_data <<endl;
-       cur = cur->_next;
+       cout<<"No:"<<i <<" is " << cur->getValue() <<endl;
+       cur = cur->getNext();
        i++;
     }
 }
 
-
+int main(int, char**) {
+    LinkedList<int>* list = new LinkedList<int>();
+    int value;
+    for(int i=0;i<5;i++){
+        cout <<"Please input the value of the new node" <<endl;
+        cin >> value;
+        bool isOK = list->insertInfront(value);
+        if(!isOK){           
+            delete list;
+            return false;
+        }
+    }
+    list->printList();
+    return 0;
+}
