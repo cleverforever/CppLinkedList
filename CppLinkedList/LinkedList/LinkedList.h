@@ -29,7 +29,7 @@ public:
     }
 }
 
-    bool insertInfront(T& data){
+    bool insertInfront(const T& data){
     ListElement<T> *newElem = new ListElement<T>(data);
     if (!newElem) {
         cout << "error happened @ insertInfront"<<endl;
