@@ -6,7 +6,7 @@
       <itemPath>ListElement/ListElement.h</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles" displayName="源文件" projectFiles="true">
-      <itemPath>LinkedList/LinkedList.cpp</itemPath>
+      <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles" displayName="资源文件" projectFiles="true">
     </logicalFolder>
@@ -32,11 +32,11 @@
       </toolsSet>
       <compileType>
       </compileType>
-      <item path="LinkedList/LinkedList.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="LinkedList/LinkedList.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ListElement/ListElement.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -59,11 +59,11 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="LinkedList/LinkedList.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="LinkedList/LinkedList.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ListElement/ListElement.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>
