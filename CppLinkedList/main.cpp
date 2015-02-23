@@ -26,6 +26,7 @@ int main(int, char**) {
         }
     }
     list->printList();
+    delete list;
     return 0;
 }
 

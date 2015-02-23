@@ -11,19 +11,17 @@
 CPPUNIT_TEST_SUITE_REGISTRATION(newtestclass);
 
 newtestclass::newtestclass() {
-    list = NULL;
-}
-
-newtestclass::~newtestclass() {
-    list = NULL;
-}
-
-void newtestclass::setUp() {
     list = new LinkedList<int>();
 }
 
+newtestclass::~newtestclass() {
+    delete list;
+}
+
+void newtestclass::setUp() {
+}
+
 void newtestclass::tearDown() {
-    //delete list;
 }
 
 void newtestclass::testInsertInfront() {

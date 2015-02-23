@@ -21,15 +21,13 @@ public:
     
     virtual ~LinkedList() {
         ListElement<T>* head = this->getHead();        
-        if (head){
-            ListElement<T>* cur = NULL;
-            do{
-                cur = head;
-                this->setHead(cur->getNext());
-                delete cur;
-            }while(cur);
+        while(head){
+//            cout << "~LinkedList is invoked"<<endl;            
+            this->setHead(head->getNext());
+            delete head;
+            head = this->getHead();   
+        }
     }
-}
 
     bool insertInfront(const T& data){
         ListElement<T> *newElem = new ListElement<T>(data);
@@ -43,7 +41,7 @@ public:
         this->setHead(newElem);
 
         return true;
-}
+    }
 
     bool delNode(const T& data){
         ListElement<T>* pDeleteme = findNode(data);
@@ -64,7 +62,7 @@ public:
            cur = cur->getNext();
            i++;
         }
-}
+    }
     
     ListElement<T>* getHead() const {
         return _head;
