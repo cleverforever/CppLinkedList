@@ -18,37 +18,47 @@ template<class T>
 class LinkedList {
 public:
     LinkedList():_head(NULL){}
+    
     virtual ~LinkedList() {
-    if (_head){
-        ListElement<T>* cur = NULL;
-        do{
-            cur = _head;
-            _head = cur->getNext();
-            delete cur;
-        }while(cur);
+        ListElement<T>* head = this->getHead();        
+        if (head){
+            ListElement<T>* cur = NULL;
+            do{
+                cur = head;
+                this->setHead(cur->getNext());
+                delete cur;
+            }while(cur);
     }
 }
 
     bool insertInfront(const T& data){
-    ListElement<T> *newElem = new ListElement<T>(data);
-    if (!newElem) {
-        cout << "error happened @ insertInfront"<<endl;
-        return false;
-    }
-    
-    newElem->setNext(_head);      
-    _head = newElem;
+        ListElement<T> *newElem = new ListElement<T>(data);
+        if (!newElem) {
+            cout << "error happened @ insertInfront"<<endl;
+            return false;
+        }
 
-    return true;    
+        ListElement<T>* head = this->getHead();  
+        newElem->setNext(head);
+        this->setHead(newElem);
+
+        return true;
 }
 
-//    bool delNode(T data); 
+    bool delNode(const T& data){
+        ListElement<T>* pDeleteme = findNode(data);
+        if(!pDeleteme) return false;
+        this->setHead(pDeleteme->getNext());
+        delete pDeleteme;
+        return true;
+    }
     
-    void printList() {
-        if( !_head ) return;
+    void printList() const{
+        ListElement<T>* head = this->getHead();
+        if( !head ) return;
 
         int i=0;
-        ListElement<T> *cur = _head;
+        ListElement<T> *cur = head;
         while(cur){
            cout<<"No:"<<i <<" is " << cur->getValue() <<endl;
            cur = cur->getNext();
@@ -56,6 +66,27 @@ public:
         }
 }
     
+    ListElement<T>* getHead() const {
+        return _head;
+    }
+    
+    ListElement<T>* findNode(const T& data)const{
+        ListElement<T>* cur = this->getHead();
+        while(cur){
+            if(cur->getValue() == data){
+                break;
+            }
+            else
+                cur = cur->getNext();
+        }
+        return cur;        
+    }
+    
+protected:   
+   void setHead(ListElement<T>* head){
+       _head = head;
+   }
+   
 private:
     ListElement<T>* _head;
 
