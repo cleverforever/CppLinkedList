@@ -13,7 +13,7 @@
 template<class T>
 class ListElement {
 public:
-    ListElement(const T &data):_next(NULL), _data(data){}
+    ListElement(const T& data):_next(NULL), _data(data){}
     virtual ~ListElement(){}
     
     inline  ListElement* getNext()  const {return _next;}

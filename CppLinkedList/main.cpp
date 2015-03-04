@@ -15,18 +15,24 @@ using namespace std;
  */
 int main(int, char**) {
     LinkedList<int>* list = new LinkedList<int>();
-    int value;
-    for(int i=0;i<5;i++){
-        cout <<"Please input the value of the new node" <<endl;
-        cin >> value;
-        bool isOK = list->insertInfront(value);
+    
+    for(int i=1;i<=5;i++){
+        bool isOK = list->insertInFront(i);
         if(!isOK){           
             delete list;
             return false;
         }
     }
+    cout<<"inserted"<<endl;
     list->printList();
-    delete list;
+    
+    for(int j=5;j>=1;j--){
+        list->delNodeInFront(j);
+        cout<<"deleted"<<j<<endl;    
+        list->printList();
+    }
+
+//    delete list;
     return 0;
 }
 

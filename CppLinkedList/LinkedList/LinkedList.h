@@ -12,8 +12,6 @@
 #include <cstdlib>
 #include <iostream>
 
-using namespace std;
-
 template<class T>
 class LinkedList {
 public:
@@ -29,10 +27,10 @@ public:
         }
     }
 
-    bool insertInfront(const T& data){
+    bool insertInFront(const T& data){
         ListElement<T> *newElem = new ListElement<T>(data);
         if (!newElem) {
-            cout << "error happened @ insertInfront"<<endl;
+            std::cout << "error happened @ insertInfront"<<std::endl;
             return false;
         }
 
@@ -43,22 +41,44 @@ public:
         return true;
     }
 
-    bool delNode(const T& data){
-        ListElement<T>* pDeleteme = findNode(data);
-        if(!pDeleteme) return false;
-        this->setHead(pDeleteme->getNext());
-        delete pDeleteme;
-        return true;
+    bool delNodeInFront(const T& data){
+        ListElement<T> *pCur = this->getHead(), *pNext = NULL;
+        bool isOK = false;
+        if(!pCur) return isOK;
+        pNext = pCur->getNext();
+         //The head will be deleted
+        if(pCur->getValue() == data){
+            this->setHead( pNext );
+            delete pCur;
+            pCur = pNext;
+            isOK = true;
+        }
+    
+        while(pNext){            
+            if(pNext->getValue() == data){
+                pCur->setNext(pNext->getNext());
+                delete pNext;
+                isOK = true;
+            }
+            else {
+                pCur = pNext;
+            }
+            pNext = pCur->getNext();
+        }
+        return isOK;
     }
     
     void printList() const{
         ListElement<T>* head = this->getHead();
-        if( !head ) return;
+        if( !head ){
+            std::cout<<"There is no element!"<<std::endl;
+            return;
+        }
 
         int i=0;
         ListElement<T> *cur = head;
         while(cur){
-           cout<<"No:"<<i <<" is " << cur->getValue() <<endl;
+           std::cout<<"No:"<<i <<" is " << cur->getValue() <<std::endl;
            cur = cur->getNext();
            i++;
         }
