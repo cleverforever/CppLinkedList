@@ -29,24 +29,24 @@ void newtestclass::tearDown() {
 
 void newtestclass::testInsertInfront() {
     ListElement<int>*  cur = list->getHead();
-    for(int j=1;j<=5;j++){
+    for(int j=5;j>=1;j--){
         CPPUNIT_ASSERT_EQUAL( j, cur->getValue() );
+        cur = cur->getNext();
     }
 }
 
 void newtestclass::testFindNode() {
-    int value = 3;
-//    list->insertInfront(value);    
-    ListElement<int>* findme = list->findNode(value);
-    CPPUNIT_ASSERT( value == findme->getValue() );
+    ListElement<int>* findme = NULL;
+    for(int j=5;j>=1;j--){
+        findme = list->findNode(j);
+        CPPUNIT_ASSERT_EQUAL( j, findme->getValue() );
+    }
 }
 
-void newtestclass::testDelNode() {
-//    int value = 4;
-//    list->insertInfront(value);    
-//    bool isOk = list->delNode(value);
-//    CPPUNIT_ASSERT(list->findNode(value)==NULL);
-//    CPPUNIT_ASSERT(isOk);
-    CPPUNIT_ASSERT(true);
+void newtestclass::testDelNode() {  
+    for(int j=5;j>=1;j--){
+        list->delNodeInFront(j);
+        CPPUNIT_ASSERT(list->findNode(j)==NULL);
+    }
 }
 
